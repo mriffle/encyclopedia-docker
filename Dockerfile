@@ -1,7 +1,7 @@
-FROM ubuntu:20.04 AS builder
+FROM ubuntu:18.04 AS builder
 
-LABEL maintainer "Michael Riffle <mriffle@uw.edu>"
-LABEL comment "Based on work by Aaron Maurais -- MacCoss Lab"
+LABEL maintainer = "Michael Riffle <mriffle@uw.edu>"
+LABEL comment = "Based on work by Aaron Maurais -- MacCoss Lab"
 
 ENV PERCOLATOR_VERSION='3-01'
 ENV ENCYCLOPEDIA_VERSION='2.12.30'
@@ -32,14 +32,14 @@ FROM amazoncorretto:8
 LABEL maintainer "Michael Riffle <mriffle@uw.edu>"
 LABEL comment "Based on work by Aaron Maurais -- MacCoss Lab"
 
-COPY --from=builder /code/percolator  /usr/local/bin/percolator
+COPY --from=builder /code/percolator/percolator-rel-3-01/src/percolator  /usr/local/bin/percolator
 COPY --from=builder /code/encyclopedia.jar /usr/local/bin/encyclopedia.jar
 
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod 755 /usr/local/bin/entrypoint.sh && \
     chmod 755 /usr/local/bin/percolator && \
-    yum install -y procps && \
+    yum install -y procps libgomp && \
     yum clean all && \
     rm -rf /var/cache/yum
 
