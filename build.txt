@@ -1,0 +1,5 @@
+sudo docker image build -t mriffle/encyclopedia:latest -t mriffle/encyclopedia:2.12.30-2 -t quay.io/protio/encyclopedia:latest -t quay.io/protio/encyclopedia:2.12.30-2 .
+sudo docker push mriffle/encyclopedia:latest
+sudo docker push mriffle/encyclopedia:2.12.30-2
+sudo docker push quay.io/protio/encyclopedia:latest
+sudo docker push quay.io/protio/encyclopedia:2.12.30-2
